@@ -1,4 +1,4 @@
-const { generateKeyPairSync } = require('crypto');
+const crypto = require('crypto');
 const fs = require('fs');
 const keyPairPath = "./keyPair.json"
 const keyPairJSON = require(keyPairPath);
@@ -10,7 +10,7 @@ function setKeyPair(privateKey,publicKey){
 }
 
 function generateKeyPair(){
-    const { publicKey, privateKey } = generateKeyPairSync('rsa', {
+    const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
         modulusLength: 530,    // options
         publicExponent: 0x10101,
         publicKeyEncoding: {
@@ -30,23 +30,39 @@ function generateKeyPair(){
     var publicKeyString = publicKey.toString('hex');
     var privateKeyString = privateKey.toString('hex');
     setKeyPair(privateKeyString,publicKeyString)
+    return { publicKey, privateKey } 
 }
 
 function getPublickKey(){
     if(keyPairJSON.publicKey){
-        return keyPairJSON.publicKey
+        const publicKey = crypto.createPublicKey({
+            key: Buffer.from(keyPairJSON.publicKey,'hex'),
+            type: 'pkcs1',
+            format: 'der'
+        })
+        return publicKey
     }
-    generateKeyPair()
-    return keyPairJSON.publicKey
+    const pairs = generateKeyPair()
+    return pairs.publicKey
 }
 
 function getPrivateKey(){
     if(keyPairJSON.privateKey){
-        return keyPairJSON.privateKey
+        // return keyPairJSON.privateKey
+        const privateKey = crypto.createPrivateKey({
+            key: Buffer.from(keyPairJSON.privateKey,'hex'),
+            type: 'pkcs8',
+            format: 'der',
+            cipher: 'aes-192-cbc',
+            passphrase: 'somePassPhrase'
+        })
+
+        return privateKey
     }
-    generateKeyPair()
-    return keyPairJSON.privateKey
+    const pairs = generateKeyPair()
+    return pairs.privateKey
 }
+
 
 module.exports ={
     getPrivateKey,
