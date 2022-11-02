@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/Testtsts/DigitalSignature_KIJ_19_0090#readme",
   "dependencies": {
-    "crypto-js": "^4.1.1",
     "pdf-lib": "^1.17.1"
   }
 }

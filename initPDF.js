@@ -22,4 +22,3 @@ async function createPdf() {
 }
 
 createPdf()
-console.log('test')
