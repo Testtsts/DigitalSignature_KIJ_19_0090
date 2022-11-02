@@ -3,7 +3,13 @@ const fs = require('fs')
 const pdfParse = require('pdf-parse')
 const crypto = require('crypto')
 
+
 main()
+
+function setSignature(signature){
+    const signaturePath = './signature.txt'
+    fs.writeFileSync(signaturePath,signature)
+}
 
 async function getPdfContent(filePath){
     let pdfExtract
@@ -22,6 +28,7 @@ async function createSign(filePath,privateKey){
     sign.update(fileContent)
     sign.end()
     const signature = sign.sign(privateKey).toString('hex')
+    setSignature(signature)
     console.log(fileContent,signature)
 }
 
