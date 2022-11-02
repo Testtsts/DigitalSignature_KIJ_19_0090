@@ -1,0 +1,23 @@
+{
+  "name": "digitalsignature_kij_19_0090",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Testtsts/DigitalSignature_KIJ_19_0090.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Testtsts/DigitalSignature_KIJ_19_0090/issues"
+  },
+  "homepage": "https://github.com/Testtsts/DigitalSignature_KIJ_19_0090#readme",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "pdf-lib": "^1.17.1"
+  }
+}
