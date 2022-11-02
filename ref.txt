@@ -1,1 +1,2 @@
 https://hashnode.com/post/digital-signature-in-node-js-cks3ewmq40vqrhqs1axb9h4ci
+https://www.positronx.io/how-to-get-or-display-content-from-pdf-file-in-node/
