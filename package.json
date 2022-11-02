@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Testtsts/DigitalSignature_KIJ_19_0090#readme",
   "dependencies": {
-    "pdf-lib": "^1.17.1",
     "pdf-parse": "^1.1.1"
-  }
+  },
+  "devDependencies": {}
 }
