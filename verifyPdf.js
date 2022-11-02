@@ -24,16 +24,17 @@ async function verifySign(filePath,publicKey,signature){
     const verify = crypto.createVerify('SHA256')
     verify.update(fileContent)
     verify.end()
-    const result = verify.verify(publicKey)
-    console.log(fileContent,result)
+    const result = verify.verify(publicKey,Buffer.from(signature,'hex'))
+    console.log('Verification result: ',result)
 }
 
 function main(){
     key = keyPair.getPublickKey()
+    console.log(signature)
     if (!process.argv[2]){
-        verifySign('./dummy.pdf',key)
+        verifySign('./dummy.pdf',key,signature)
     }
     else{
-        verifySign(process.argv[2],key)
+        verifySign(process.argv[2],key,signature)
     }
 }

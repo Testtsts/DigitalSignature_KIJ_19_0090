@@ -32,7 +32,7 @@ async function createSign(filePath,privateKey){
     sign.end()
     const signature = sign.sign(privateKey).toString('hex')
     setSignature(signature)
-    console.log(fileContent,signature)
+    console.log('Generated Signature: ',signature)
 }
 
 async function main(){
