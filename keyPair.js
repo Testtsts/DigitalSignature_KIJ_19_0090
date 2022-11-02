@@ -33,7 +33,10 @@ function generateKeyPair(){
     return { publicKey, privateKey } 
 }
 
-function getPublickKey(){
+function getPublickKey(depth=1){
+    if (depth >3 ){
+        throw new Error('infinite loop')
+    }
     if(keyPairJSON.publicKey){
         const publicKey = crypto.createPublicKey({
             key: Buffer.from(keyPairJSON.publicKey,'hex'),
@@ -42,11 +45,15 @@ function getPublickKey(){
         })
         return publicKey
     }
-    const pairs = generateKeyPair()
-    return pairs.publicKey
+    generateKeyPair()
+    depth++
+    getPublickKey(depth)
 }
 
-function getPrivateKey(){
+function getPrivateKey(depth=1){
+    if (depth >3 ){
+        throw new Error('infinite loop')
+    }
     if(keyPairJSON.privateKey){
         // return keyPairJSON.privateKey
         const privateKey = crypto.createPrivateKey({
@@ -59,8 +66,9 @@ function getPrivateKey(){
 
         return privateKey
     }
-    const pairs = generateKeyPair()
-    return pairs.privateKey
+    generateKeyPair()
+    depth++
+    return getPrivateKey(depth)
 }
 
 

@@ -7,8 +7,11 @@ const crypto = require('crypto')
 main()
 
 function setSignature(signature){
-    const signaturePath = './signature.txt'
-    fs.writeFileSync(signaturePath,signature)
+    signaturePath='./signature.json'
+    const signatureJSON = {
+        'signature': signature
+    }
+    fs.writeFileSync(signaturePath,JSON.stringify(signatureJSON,null,4))
 }
 
 async function getPdfContent(filePath){
@@ -32,8 +35,8 @@ async function createSign(filePath,privateKey){
     console.log(fileContent,signature)
 }
 
-function main(){
-    key = keyPair.getPrivateKey()
+async function main(){
+    key = await keyPair.getPrivateKey()
     if (!process.argv[2]){
         createSign('./dummy.pdf',key)
     }
